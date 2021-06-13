@@ -17,6 +17,6 @@ public class TournamentDto {
     private String tournamentName;
 
     public boolean hasInvalidAttributes() {
-        return tournamentName == null;
+        return (tournamentName == null || tournamentName.length()<=0);
     }
 }

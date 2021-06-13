@@ -32,13 +32,13 @@ public class TournamentController {
     }
 
 
-    @PatchMapping("/{tournamentId}")
+    @PatchMapping("/tournaments/{tournamentId}")
     public ResponseEntity updateTournament(@PathVariable Long tournamentId, @RequestBody TournamentDto tournamentDto) {
         tournamentService.updateTournament(tournamentId, tournamentDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/{tournamentId}")
+    @DeleteMapping("/tournaments/{tournamentId}")
     public  ResponseEntity deleteTournament (@PathVariable Long tournamentId){
         tournamentService.deleteTournament(tournamentId);
         return new ResponseEntity<>(HttpStatus.OK);
