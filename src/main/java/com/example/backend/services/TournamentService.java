@@ -21,9 +21,6 @@ public class TournamentService {
         return tournamentRepository.findAll();
     }
 
-    public TournamentEntity getTournament (Long tournamentId) {
-        return findTournament(tournamentId);
-    }
 
     public TournamentEntity addTournament(TournamentDto tournamentDto) {
         if (!tournamentDto.hasInvalidAttributes()) {

@@ -12,21 +12,21 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/{tournamentId}/matches")
 public class MatchController {
     @Autowired
     MatchService matchService;
 
-    @GetMapping("/matches/{tournamentId}")
+    @GetMapping()
     public ResponseEntity<List<MatchEntity>> getAllMatches(@PathVariable Long tournamentId){
         return new ResponseEntity<>(matchService.getAllMatches(tournamentId), HttpStatus.OK);
     }
 
-//    @PostMapping("tournaments")
-//    public ResponseEntity addNewMatch (@PathVariable tournamentId, @RequestBody MatchDto matchDto) {
-//        matchService.addMatch(matchDto);
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
+    @PostMapping()
+    public ResponseEntity addNewMatch (@PathVariable Long tournamentId, @RequestBody MatchDto matchDto) {
+        matchService.addMatch(tournamentId, matchDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     @PatchMapping("/{matchId}")
     public ResponseEntity updateMatch (@PathVariable Long matchId, @RequestBody MatchDto matchDto) {

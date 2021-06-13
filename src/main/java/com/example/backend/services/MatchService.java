@@ -1,7 +1,6 @@
 package com.example.backend.services;
 
 import com.example.backend.dtos.MatchDto;
-import com.example.backend.dtos.MatchDtoRequest;
 import com.example.backend.entities.MatchEntity;
 import com.example.backend.entities.TournamentEntity;
 import com.example.backend.repositiories.MatchRepository;
@@ -24,20 +23,17 @@ public class MatchService {
         this.matchRepository = matchRepository;
     }
 
-    public List <MatchEntity> getAllMatches (Long tounamentId) {
-        TournamentEntity tournamentEntity = findTournament(tounamentId);
+    public List <MatchEntity> getAllMatches (Long tournamentId) {
+        TournamentEntity tournamentEntity = findTournament(tournamentId);
         return new ArrayList <> (tournamentEntity.getMatches());
     }
 
-    public MatchEntity getMatch (Long matchId) {
-        return findMatch(matchId);
-    }
 
-    public MatchEntity addMatch (Long tournamentId, MatchDtoRequest matchDtoRequest) {
-        if ((!matchDtoRequest.hasInvalidAttributes()) && !(tournamentId == null || tournamentId <= 0)) {
+    public MatchEntity addMatch (Long tournamentId, MatchDto matchDto) {
+        if ((!matchDto.hasInvalidAttributes()) && !(tournamentId == null || tournamentId <= 0)) {
             MatchEntity match = new MatchEntity();
-            match.setMatchName(matchDtoRequest.getMatchName());
-            match.setMatchDate(matchDtoRequest.getMatchDate());
+            match.setMatchName(matchDto.getMatchName());
+            match.setMatchDate(matchDto.getMatchDate());
             match.setTournament(findTournament(tournamentId));
             matchRepository.save(match);
             return match;
